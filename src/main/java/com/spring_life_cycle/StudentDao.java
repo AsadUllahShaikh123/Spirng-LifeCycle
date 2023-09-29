@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 public class StudentDao {
 
@@ -56,6 +57,7 @@ public class StudentDao {
 		Class.forName(driver);
 
 	    connection = DriverManager.getConnection(url, userName, password);
+	    System.out.println("Post Construct ...");
 	}
 	
 	
@@ -71,7 +73,7 @@ public class StudentDao {
 
 			System.out.println("Id : " + id + " Name : " + name + " Address : " + address);
 		}
-		connection.close();
+		
 	}
 
 	public void deleteStudent(int id) throws ClassNotFoundException, SQLException {
@@ -82,7 +84,12 @@ public class StudentDao {
 		statement.setInt(1, id);
 		statement.executeUpdate();
 		
-		connection.close();
+		
 	}
 
+	@PreDestroy
+	public void closeConnection() throws SQLException {
+		System.out.println("Destroy Method Called ....");
+		connection.close();
+	}
 }

@@ -11,5 +11,6 @@ public class Main {
 		ApplicationContext context = new ClassPathXmlApplicationContext("com/spring_life_cycle/beans.xml");
 		StudentDao dao = context.getBean("studentDao",StudentDao.class);
 		dao.selectAllRows();
+		((ClassPathXmlApplicationContext)context).close();
 	}
 }
