@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.annotation.PostConstruct;
+
 public class StudentDao {
 
 	private String driver;
@@ -49,6 +51,7 @@ public class StudentDao {
 		this.password = password;
 	}
 
+	@PostConstruct
 	public void getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
 
@@ -59,7 +62,6 @@ public class StudentDao {
 	public void selectAllRows() throws ClassNotFoundException, SQLException {
 		
 		String sql = " select * from student";
-		getConnection();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet result = statement.executeQuery();
 		while (result.next()) {
@@ -73,7 +75,7 @@ public class StudentDao {
 	}
 
 	public void deleteStudent(int id) throws ClassNotFoundException, SQLException {
-		getConnection();
+		
 		String sql = " delete from student where id = ? ";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
