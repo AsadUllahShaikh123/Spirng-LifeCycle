@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p" 
+xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" 
+xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        ">
+
+
+	<!-- We have to enable annotations for our spring application -->
+	<context:annotation-config />
+	
+	
+	<context:component-scan base-package="com.streotype"/>
+	
+	<bean id="studentDao" class="com.spring_life_cycle.StudentDao">
+		<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/spring_jdbc"/>
+		<property name="userName" value="root"/>
+		<property name="password" value="Admin"/>
+	</bean>
+	
+	
+	
+</beans> 
